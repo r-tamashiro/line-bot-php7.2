@@ -1,5 +1,5 @@
 <?php
-DEFINE("ACCESS_TOKEN", getenv('ACCESS_TOKEN');
+DEFINE("ACCESS_TOKEN", getenv('ACCESS_TOKEN'));
 DEFINE("SECRET_TOKEN", getenv('SECRET_TOKEN'));
 
 use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
