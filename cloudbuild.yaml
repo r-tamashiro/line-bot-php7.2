@@ -1,0 +1,18 @@
+steps:
+- id: "composer install"
+  name: "prooph/composer:7.2"
+  args: ['install']
+- id: "composer dump-autoload"
+  name: "prooph/composer:7.2"
+  args: ['dump-autoload']
+- id: "LINE Messaging API ACCESS_TOKEN 置換"
+  name: 'ubuntu'
+  entrypoint: 'bash'
+  args: ['-c', 'sed -i -e s#__ACCESS_TOKEN__#$_ACCESS_TOKEN# app.yaml']
+- id: "LINE Messaging API SECRET_TOKEN 置換"
+  name: 'ubuntu'
+  entrypoint: 'bash'
+  args: ['-c', 'sed -i -e s#__SECRET_TOKEN__#$_SECRET_TOKEN# app.yaml']
+- id: 'AppEngineへデプロイ'
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: ['beta', 'app', 'deploy', 'app.yaml', "--no-cache"]
