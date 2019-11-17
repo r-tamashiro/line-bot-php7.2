@@ -1,0 +1,21 @@
+FROM ubuntu
+
+ENV PHP_VERSION ${PHP_VERSION}
+
+RUN apt-get update && apt-get install -y tzdata
+ENV TZ=Asia/Tokyo 
+
+RUN apt-get update && apt-get install -y \
+  php${PHP_VERSION} \
+  php${PHP_VERSION}-curl \
+  git
+
+RUN apt install -y \
+  composer
+
+VOLUME ["/app"]
+WORKDIR /app
+
+# Set up the command arguments
+CMD ["-"]
+ENTRYPOINT ["composer", "--ansi"]
